@@ -1,6 +1,6 @@
-# Sugarchain-Firefox-Wallet
+# MicroBitcoin-Firefox-Wallet
 
-Light sugarchain Web wallet in the form of a firefox add-on which utilises bitcoin.js and a simple REST API https://api.sugarchain.org
+Light MicroBitcoin Web wallet in the form of a firefox add-on which utilises bitcoin.js and a simple REST API https://api.mbc.wiki
 
 ### Installation
 
@@ -14,4 +14,4 @@ Light sugarchain Web wallet in the form of a firefox add-on which utilises bitco
 8. Click the logo and enjoy using the Add-on. And remember to logout before you exit firefox :grin:
 
 TODO:
-- [x] Publish on to AMO! Success!!! :grin: https://addons.mozilla.org/en-US/firefox/addon/sugarchain-wallet-extension/
+- [ ] Publish on to AMO!
