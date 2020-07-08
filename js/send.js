@@ -4,10 +4,8 @@
 
 var wif
 var wifKey
-var api
 var address
-var netconfig
-var href
+var api
 window.onload = function() {
     // Get WIF and address from local storage
     wifKey = localStorage.getItem("wifKey")
@@ -24,36 +22,41 @@ window.onload = function() {
     apiget = localStorage.getItem("apiSet")
 
     // Set history page to open to explorer & sets placeholder to testnet or mainnet prefix
-    if (apiget == "mainnet" || apiget == null) {
-        api = "https://api.sugarchain.org"
-        inputPlaceholder.attr("placeholder", "sugar1q...")
+    /*if (apiget == "mainnet" || apiget == null) {
+        api = "https://api.mbc.wiki"
+        inputPlaceholder.attr("placeholder", "mbc1q...")
         href = "https://sugarchain.org/explorer/#/address/" + address
     }
     else if (apiget == "testnet"){
-        api = "https://api-testnet.sugarchain.org"
+        api = "https://api.mbc.wiki/test"
         inputPlaceholder.attr("placeholder", "tugar1q...")
         href = "https://sugar.wtf/#/address/" + address
-    }
-    $("#history").attr("href", href)
+    }*/
+    api = "https://api.mbc.wiki"
 
-    getSendAPI()
+    var href = "https://microbitcoinorg.github.io/explorer/#/address/" + address
+    inputPlaceholder.attr("placeholder", "mbc1q...")
+
+    $("#history").attr("href", href)
+    //getSendAPI()
 }
 
 var errororsuccess
-function getSendAPI() {
+/*function getSendAPI() {
     // Set Network config according to Endpoint selection
     if (localStorage.getItem("api") == "https://api.sugarchain.org" || localStorage.getItem("api") == null){
         netconfig = {					
            'network': {
-                'messagePrefix': '\x19Sugarchain Signed Message:\n',
+                'messagePrefix': '\x19Bitcoin Signed Message:\n',
                 'bip32': {
                     'public': 0x0488b21e,
                     'private': 0x0488ade4
                 },
-               'bech32': 'sugar',
-               'pubKeyHash': 0x3F,
-               'scriptHash': 0x7D,
-                'wif': 0x80}
+                'bech32': 'mbc',
+                'pubKeyHash': 0x1A,
+                'scriptHash': 0x33,
+                'wif': 0x80
+            }
         }
     }
       
@@ -68,8 +71,22 @@ function getSendAPI() {
                'bech32': 'tugar',
                'pubKeyHash': 0x42,
                'scriptHash': 0x80,
-                'wif': 0xEF}
+                'wif': 0xEF
+            }
         }
+    }
+}*/
+var netconfig = {
+    'network': {
+        'messagePrefix': '\x19Bitcoin Signed Message:\n',
+        'bip32': {
+            'public': 0x0488b21e,
+            'private': 0x0488ade4
+        },
+        'bech32': 'mbc',
+        'pubKeyHash': 0x1A,
+        'scriptHash': 0x33,
+        'wif': 0x80
     }
 }
 
@@ -93,7 +110,7 @@ $("#sendTx").click(function () {
 
     var scripts = []
 
-    ask = confirm("Confirm Transaction. You are about to send " + $("#amountSUGAR").val() + " SUGAR to " + receiver + ". The fee is " + feeShow/*(amountShow - Number($("#amountSUGAR").val()))*/ + " SUGAR\nTotal Cost: " + amountShow + " SUGAR")
+    ask = confirm("Confirm Transaction. You are about to send " + $("#amountSUGAR").val() + " MBC to " + receiver + ". The fee is " + feeShow + " MBC\nTotal Cost: " + amountShow + " MBC")
     if (ask == true){
         var showErrororSuccess = $("#showErrororSuccess")
         showErrororSuccess.text("Sending Transaction...")
@@ -232,13 +249,13 @@ function resetForm() {
 
 // Conversion of standars integer to satoshis
 function convertAmountFormat(amount, invert = false) {
-    decimals = 8
-    if (!invert) {
-        return parseFloat((amount / Math.pow(10, decimals)).toFixed(decimals))
-    }
-    else {
-        return parseInt(amount * Math.pow(10, decimals))
-    }
+        decimals = 4
+        if (!invert) {
+            return parseFloat((amount / Math.pow(10, decimals)).toFixed(decimals))
+        }
+        else {
+            return parseInt(amount * Math.pow(10, decimals))
+        }
 }
 
 // Multi Lang
